@@ -185,16 +185,33 @@ class MainActivity : Activity() {
         if (isHistoryDrawerShowing) return
 
         // inflate and add the history sheet UI
+        // Inflate sheet
         val sheet = LayoutInflater.from(this).inflate(R.layout.view_history_drawer, root, false)
         sheet.setOnClickListener { /* Eat touch events to keep drawer open */ }
         root.addView(sheet)
         root.visibility = View.VISIBLE
         historyDrawer = sheet
         isHistoryDrawerShowing = true
-        populateHistoryDrawer(sheet)
 
-        // Hide result row while history is showing
-        resultHistoryRow.visibility = View.GONE
+        // Start from below screen and animate up
+        sheet.alpha = 0f
+        sheet.translationY = 1200f
+        sheet.animate()
+            .translationY(0f)
+            .alpha(1f)
+            .setDuration(300)
+            .withStartAction {
+                // Hide result row when animation starts
+                resultHistoryRow.animate()
+                    .alpha(0f)
+                    .setDuration(200)
+                    .withEndAction {
+                        resultHistoryRow.visibility = View.GONE
+                    }
+            }
+            .start()
+
+        populateHistoryDrawer(sheet)
 
         // Dismiss on clicking outside
         root.isClickable = true
@@ -210,21 +227,28 @@ class MainActivity : Activity() {
         val root = findViewById<ViewGroup>(R.id.historyDrawerContainer)
         if (!isHistoryDrawerShowing || historyDrawer == null) return
 
-        // Animate down + remove after
+        // Animate down + fade out
         historyDrawer?.let { drawer ->
-            ObjectAnimator.ofFloat(drawer, "translationY", 0f, 1200f)
-                .apply {
-                    duration = 250
-                    start()
+            drawer.animate()
+                .translationY(1200f)
+                .alpha(0f)
+                .setDuration(250)
+                .withStartAction {
+                    // Show result row with fade in
+                    resultHistoryRow.visibility = View.VISIBLE
+                    resultHistoryRow.alpha = 0f
+                    resultHistoryRow.animate()
+                        .alpha(1f)
+                        .setDuration(200)
+                        .start()
                 }
-            drawer.postDelayed({
-                root.removeView(drawer)
-                root.visibility = View.GONE
-                historyDrawer = null
-                isHistoryDrawerShowing = false
-                // Restore result row visibility
-                resultHistoryRow.visibility = View.VISIBLE
-            }, 250)
+                .withEndAction {
+                    root.removeView(drawer)
+                    root.visibility = View.GONE
+                    historyDrawer = null
+                    isHistoryDrawerShowing = false
+                }
+                .start()
         }
     }
 
