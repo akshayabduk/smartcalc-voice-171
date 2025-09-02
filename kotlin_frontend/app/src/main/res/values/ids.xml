@@ -4,4 +4,5 @@
     <item name="historyTimestamp" type="id"/>
     <item name="historyExpression" type="id"/>
     <item name="historyResult" type="id"/>
+    <item name="favoriteButton" type="id"/>
 </resources>

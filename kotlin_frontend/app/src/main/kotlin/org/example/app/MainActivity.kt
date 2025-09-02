@@ -334,10 +334,17 @@ class MainActivity : Activity() {
 
             // Set up RecyclerView if not already set up
             if (recyclerView.adapter == null) {
-                val adapter = HistoryAdapter(allHistory.toMutableList()) { position ->
-                    // Handle item removal
-                    CalculationHistory.removeAt(position)
-                }
+                val adapter = HistoryAdapter(
+                    allHistory.toMutableList(),
+                    onEntryRemoved = { position ->
+                        // Handle item removal
+                        CalculationHistory.removeAt(position)
+                    },
+                    onFavoriteToggled = { position ->
+                        // Handle favorite toggling
+                        CalculationHistory.toggleFavorite(position)
+                    }
+                )
                 recyclerView.adapter = adapter
                 recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
                 
@@ -365,6 +372,13 @@ class MainActivity : Activity() {
             CalculationHistory.clear()
             populateHistoryDrawer(drawer)
             Toast.makeText(this, getString(R.string.empty_history_prompt), Toast.LENGTH_SHORT).show()
+        }
+
+        // Wire up favorites filter switch
+        val switchFavorites = drawer.findViewById<androidx.appcompat.widget.SwitchCompat>(R.id.switchFavorites)
+        switchFavorites.setOnCheckedChangeListener { _, isChecked ->
+            CalculationHistory.setShowOnlyFavorites(isChecked)
+            populateHistoryDrawer(drawer)
         }
 
         // Wire up close (X) button
