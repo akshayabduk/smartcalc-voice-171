@@ -6,4 +6,31 @@
         <item name="android:textColorPrimary">@color/onSurface</item>
         <item name="android:windowBackground">@color/surface</item>
     </style>
+    <!-- Calculator button styles -->
+    <style name="CalcKey" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:backgroundTint">@color/surface</item>
+        <item name="android:textColor">@color/onSurface</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:background">@android:drawable/btn_default</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+    </style>
+
+    <style name="CalcKeyPrimary" parent="CalcKey">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="CalcKeyWide" parent="CalcKey">
+        <item name="android:layout_weight">2</item>
+    </style>
 </resources>

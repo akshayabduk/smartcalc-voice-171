@@ -13,6 +13,7 @@ import android.text.TextWatcher
 import android.widget.TextView
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.Button
 
 class MainActivity : Activity() {
 
@@ -22,19 +23,18 @@ class MainActivity : Activity() {
     private lateinit var btnClearExpression: ImageButton
 
     private var currentExpression: String = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val textView = findViewById(R.id.textView) as TextView
+        val textView = findViewById<TextView>(R.id.textView)
         textView.text = buildMessage()
 
         // Initialize VoiceSearchBar and connect to this Activity
         voiceSearchBar = findViewById(R.id.voiceSearchBar)
         voiceSearchBar.setHostActivity(this)
 
-        // Setup the input/expression row and clear button
+        // Setup input/expression row and clear button
         inputExpressionRow = findViewById(R.id.inputExpressionRow)
         tvCurrentExpression = findViewById(R.id.tvCurrentExpression)
         btnClearExpression = findViewById(R.id.btnClearExpression)
@@ -55,15 +55,69 @@ class MainActivity : Activity() {
             voiceSearchBar.setQuery("")
             updateCurrentExpression("")
         }
+
+        // --- CALCULATOR KEYPAD LOGIC: wire up all keys to update input ---
+        wireCalculatorKeypad()
     }
 
     private fun updateCurrentExpression(expression: String) {
         currentExpression = expression
         tvCurrentExpression.text = expression
         // Optionally, you could hide the row or clear button when empty for more minimal effect
-        // Example:
         // inputExpressionRow.visibility = if (expression.isBlank()) View.GONE else View.VISIBLE
         // btnClearExpression.visibility = if (expression.isBlank()) View.INVISIBLE else View.VISIBLE
+    }
+
+    /**
+     * PUBLIC_INTERFACE
+     * Adds listeners to calculator keypad buttons so that tapping a button appends the symbol to the input.
+     */
+    private fun wireCalculatorKeypad() {
+        // Helper to append symbol to the input bar
+        fun appendToInput(symbol: String) {
+            val orig = voiceSearchBar.getQuery()
+            // If equals (=), no-op (calculation logic will be added later)
+            if (symbol == "=") return
+            val newExpr = orig + symbol
+            voiceSearchBar.setQuery(newExpr)
+            // updateCurrentExpression(newExpr) // voiceSearchBar will trigger update through listener!
+        }
+
+        // Button ID to symbol mapping
+        val buttonMap = listOf(
+            Pair(R.id.btn0, "0"),
+            Pair(R.id.btn1, "1"),
+            Pair(R.id.btn2, "2"),
+            Pair(R.id.btn3, "3"),
+            Pair(R.id.btn4, "4"),
+            Pair(R.id.btn5, "5"),
+            Pair(R.id.btn6, "6"),
+            Pair(R.id.btn7, "7"),
+            Pair(R.id.btn8, "8"),
+            Pair(R.id.btn9, "9"),
+            Pair(R.id.btnDot, "."),
+            Pair(R.id.btnPlus, "+"),
+            Pair(R.id.btnMinus, "-"),
+            Pair(R.id.btnMultiply, "×"),
+            Pair(R.id.btnDivide, "÷"),
+            Pair(R.id.btnLParen, "("),
+            Pair(R.id.btnRParen, ")"),
+            Pair(R.id.btnSin, "sin("),
+            Pair(R.id.btnCos, "cos("),
+            Pair(R.id.btnTan, "tan("),
+            Pair(R.id.btnLog, "log("),
+            Pair(R.id.btnLn, "ln("),
+            Pair(R.id.btnSqrt, "√("),
+            Pair(R.id.btnPower, "^"),
+            Pair(R.id.btnEquals, "=") // special: calculation not implemented yet
+        )
+
+        for ((id, symbol) in buttonMap) {
+            val btn = findViewById<Button>(id)
+            btn?.setOnClickListener {
+                appendToInput(symbol)
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

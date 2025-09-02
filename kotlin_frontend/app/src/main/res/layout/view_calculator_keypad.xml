@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/calculatorKeypadRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/surface"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:gravity="bottom|center_horizontal">
+
+    <!-- Scientific row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="4dp">
+
+        <Button
+            style="@style/CalcKey"
+            android:id="@+id/btnSin"
+            android:text="sin"/>
+        <Button
+            style="@style/CalcKey"
+            android:id="@+id/btnCos"
+            android:text="cos"/>
+        <Button
+            style="@style/CalcKey"
+            android:id="@+id/btnTan"
+            android:text="tan"/>
+        <Button
+            style="@style/CalcKey"
+            android:id="@+id/btnLog"
+            android:text="log"/>
+        <Button
+            style="@style/CalcKey"
+            android:id="@+id/btnLn"
+            android:text="ln"/>
+        <Button
+            style="@style/CalcKey"
+            android:id="@+id/btnSqrt"
+            android:text="√"/>
+        <Button
+            style="@style/CalcKey"
+            android:id="@+id/btnPower"
+            android:text="^"/>
+    </LinearLayout>
+
+    <!-- Row: ( ) ÷ × -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="4dp">
+        <Button style="@style/CalcKey" android:id="@+id/btnLParen" android:text="("/>
+        <Button style="@style/CalcKey" android:id="@+id/btnRParen" android:text=")"/>
+        <Button style="@style/CalcKey" android:id="@+id/btnDivide" android:text="÷"/>
+        <Button style="@style/CalcKey" android:id="@+id/btnMultiply" android:text="×"/>
+    </LinearLayout>
+
+    <!-- Row: 7 8 9 - -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="4dp">
+        <Button style="@style/CalcKey" android:id="@+id/btn7" android:text="7"/>
+        <Button style="@style/CalcKey" android:id="@+id/btn8" android:text="8"/>
+        <Button style="@style/CalcKey" android:id="@+id/btn9" android:text="9"/>
+        <Button style="@style/CalcKey" android:id="@+id/btnMinus" android:text="−"/>
+    </LinearLayout>
+
+    <!-- Row: 4 5 6 + -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="4dp">
+        <Button style="@style/CalcKey" android:id="@+id/btn4" android:text="4"/>
+        <Button style="@style/CalcKey" android:id="@+id/btn5" android:text="5"/>
+        <Button style="@style/CalcKey" android:id="@+id/btn6" android:text="6"/>
+        <Button style="@style/CalcKey" android:id="@+id/btnPlus" android:text="+"/>
+    </LinearLayout>
+
+    <!-- Row: 1 2 3 = -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="4dp">
+        <Button style="@style/CalcKey" android:id="@+id/btn1" android:text="1"/>
+        <Button style="@style/CalcKey" android:id="@+id/btn2" android:text="2"/>
+        <Button style="@style/CalcKey" android:id="@+id/btn3" android:text="3"/>
+        <Button style="@style/CalcKeyPrimary" android:id="@+id/btnEquals" android:text="="/>
+    </LinearLayout>
+
+    <!-- Row: 0 . -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <Button style="@style/CalcKeyWide" android:id="@+id/btn0" android:text="0"/>
+        <Button style="@style/CalcKey" android:id="@+id/btnDot" android:text="."/>
+    </LinearLayout>
+</LinearLayout>
