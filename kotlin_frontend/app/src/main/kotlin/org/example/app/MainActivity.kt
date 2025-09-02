@@ -56,14 +56,34 @@ class MainActivity : Activity() {
 
     /**
      * PUBLIC_INTERFACE
+     * Called to evaluate the expression and update the result box.
+     */
+    private fun evaluateAndShowResult(expression: String) {
+        if (expression.isBlank()) {
+            resultBox.text = ""
+            return
+        }
+        try {
+            val result = CalculatorEngine.evaluate(expression)
+            resultBox.text = result.toString()
+        } catch (e: Exception) {
+            resultBox.text = "Error"
+        }
+    }
+
+    /**
+     * PUBLIC_INTERFACE
      * Adds listeners to calculator keypad buttons so that tapping a button appends the symbol to the input.
      */
     private fun wireCalculatorKeypad() {
         // Helper to append symbol to the input bar
         fun appendToInput(symbol: String) {
             val orig = voiceSearchBar.getQuery()
-            // If equals (=), no-op (calculation logic will be added later)
-            if (symbol == "=") return
+            if (symbol == "=") {
+                // Evaluate
+                evaluateAndShowResult(orig)
+                return
+            }
             val newExpr = orig + symbol
             voiceSearchBar.setQuery(newExpr)
             // updateCurrentExpression(newExpr) // voiceSearchBar will trigger update through listener!
