@@ -10,4 +10,10 @@
 
     <!-- Expression/Clear row strings -->
     <string name="clear_expression_content_desc">Clear input</string>
+
+    <!-- History feature strings -->
+    <string name="history_panel_title">History</string>
+    <string name="clear_history">Clear</string>
+    <string name="empty_history_prompt">No calculations yet.</string>
+    <string name="history_icon_content_desc">Show calculation history</string>
 </resources>

@@ -5,6 +5,23 @@
     tools:context=".MainActivity"
     android:background="@color/surface">
 
+    <!-- History icon button (top right) -->
+    <ImageView
+        android:id="@+id/btnShowHistory"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_history"
+        android:tint="@color/onSurface"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/history_icon_content_desc"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="8dp"/>
+
     <org.example.app.VoiceSearchBar
         android:id="@+id/voiceSearchBar"
         android:layout_width="match_parent"
@@ -53,4 +70,16 @@
         android:layout_height="wrap_content"
         android:textColor="@color/onSurface"
         android:layout_centerInParent="true" />
+
+    <!-- Overlay root for history drawer, initially GONE -->
+    <FrameLayout
+        android:id="@+id/historyDrawerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="#99000000">
+    </FrameLayout>
+
 </RelativeLayout>

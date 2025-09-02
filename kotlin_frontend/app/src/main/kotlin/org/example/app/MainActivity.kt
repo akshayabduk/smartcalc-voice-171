@@ -14,13 +14,22 @@ import android.widget.TextView
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Button
+import android.widget.ImageView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ScrollView
+import android.widget.Toast
+import android.animation.ObjectAnimator
 
 class MainActivity : Activity() {
 
     private lateinit var voiceSearchBar: VoiceSearchBar
     private lateinit var resultBox: TextView
-
     private var currentExpression: String = ""
+    private var historyDrawer: View? = null
+    private var isHistoryDrawerShowing: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -48,6 +57,8 @@ class MainActivity : Activity() {
 
         // --- CALCULATOR KEYPAD LOGIC: wire up all keys to update input ---
         wireCalculatorKeypad()
+
+        setupHistoryPanel()
     }
 
     private fun updateResultBox(expression: String) {
@@ -58,6 +69,7 @@ class MainActivity : Activity() {
     /**
      * PUBLIC_INTERFACE
      * Called to evaluate the expression and update the result box.
+     * Also saves the calculation to history if successful.
      */
     private fun evaluateAndShowResult(expression: String) {
         if (expression.isBlank()) {
@@ -67,6 +79,8 @@ class MainActivity : Activity() {
         try {
             val result = CalculatorEngine.evaluate(expression)
             resultBox.text = result.toString()
+            CalculationHistory.add(expression, result.toString())
+            updateHistoryPanelIfVisible()
         } catch (e: Exception) {
             resultBox.text = "Error"
         }
@@ -133,6 +147,127 @@ class MainActivity : Activity() {
             voiceSearchBar.setQuery("")
             resultBox.text = ""
             currentExpression = ""
+        }
+    }
+
+    // INIT AND LOGIC for History Sheet/Drawer
+    private fun setupHistoryPanel() {
+        val btnShowHistory = findViewById<ImageView>(R.id.btnShowHistory)
+        val historyOverlayContainer = findViewById<ViewGroup>(R.id.historyDrawerContainer)
+        // inflate only on demand
+        btnShowHistory?.setOnClickListener {
+            if (!isHistoryDrawerShowing) {
+                showHistoryDrawer()
+            }
+        }
+        // clicking the overlay background closes the drawer
+        historyOverlayContainer.setOnClickListener {
+            if (isHistoryDrawerShowing) {
+                hideHistoryDrawer()
+            }
+        }
+    }
+
+    private fun showHistoryDrawer() {
+        val root = findViewById<ViewGroup>(R.id.historyDrawerContainer)
+        if (isHistoryDrawerShowing) return
+
+        // inflate and add the history sheet UI
+        val sheet = LayoutInflater.from(this).inflate(R.layout.view_history_drawer, root, false)
+        sheet.setOnClickListener { /* Eat touch events to keep drawer open */ }
+        root.addView(sheet)
+        root.visibility = View.VISIBLE
+        historyDrawer = sheet
+        isHistoryDrawerShowing = true
+        populateHistoryDrawer(sheet)
+
+        // Dismiss on clicking outside
+        root.isClickable = true
+        root.bringToFront()
+
+        // Animate drawer up (if possible)
+        sheet.translationY = sheet.height.toFloat() + 150f
+        ObjectAnimator.ofFloat(sheet, "translationY", 1200f, 0f)
+            .apply { duration = 310 }.start()
+    }
+
+    private fun hideHistoryDrawer() {
+        val root = findViewById<ViewGroup>(R.id.historyDrawerContainer)
+        if (!isHistoryDrawerShowing || historyDrawer == null) return
+
+        // Animate down + remove after
+        historyDrawer?.let { drawer ->
+            ObjectAnimator.ofFloat(drawer, "translationY", 0f, 1200f)
+                .apply {
+                    duration = 250
+                    start()
+                }
+            drawer.postDelayed({
+                root.removeView(drawer)
+                root.visibility = View.GONE
+                historyDrawer = null
+                isHistoryDrawerShowing = false
+            }, 250)
+        }
+    }
+
+    private fun populateHistoryDrawer(drawer: View) {
+        val historyListLayout = drawer.findViewById<LinearLayout>(R.id.historyList)
+        historyListLayout.removeAllViews()
+        val allHistory = CalculationHistory.getHistory()
+        if (allHistory.isEmpty()) {
+            val emptyText = TextView(this).apply {
+                setText(R.string.empty_history_prompt)
+                setTextColor(resources.getColor(R.color.hintText))
+                textSize = 17f
+                setPadding(0, 32, 0, 0)
+                gravity = android.view.Gravity.CENTER_HORIZONTAL
+            }
+            historyListLayout.addView(emptyText)
+        } else {
+            for ((expr, result) in allHistory) {
+                val entryView = LinearLayout(this).apply {
+                    orientation = LinearLayout.VERTICAL
+                    setPadding(0, 8, 0, 14)
+                }
+                val exprView = TextView(this).apply {
+                    text = expr
+                    setTextColor(resources.getColor(R.color.onSurface))
+                    textSize = 15.5f
+                    maxLines = 3
+                }
+                val resultView = TextView(this).apply {
+                    text = "= $result"
+                    setTextColor(resources.getColor(R.color.colorPrimary))
+                    textSize = 19f
+                    setPadding(0, 2, 0, 0)
+                    maxLines = 1
+                }
+                entryView.addView(exprView)
+                entryView.addView(resultView)
+                historyListLayout.addView(entryView)
+                // Optionally: add divider here
+                val divider = View(this).apply {
+                    setBackgroundColor(resources.getColor(R.color.divider))
+                    layoutParams = ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT, 1)
+                }
+                historyListLayout.addView(divider)
+            }
+        }
+        // Wire up "clear history" button
+        val btnClear = drawer.findViewById<Button>(R.id.btnClearHistory)
+        btnClear.setOnClickListener {
+            CalculationHistory.clear()
+            populateHistoryDrawer(drawer)
+            Toast.makeText(this, getString(R.string.empty_history_prompt), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // Update history panel when calculation changes
+    private fun updateHistoryPanelIfVisible() {
+        if (isHistoryDrawerShowing && historyDrawer != null) {
+            populateHistoryDrawer(historyDrawer!!)
         }
     }
 
