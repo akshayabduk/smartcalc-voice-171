@@ -18,9 +18,7 @@ import android.widget.Button
 class MainActivity : Activity() {
 
     private lateinit var voiceSearchBar: VoiceSearchBar
-    private lateinit var inputExpressionRow: LinearLayout
-    private lateinit var tvCurrentExpression: TextView
-    private lateinit var btnClearExpression: ImageButton
+    private lateinit var resultBox: TextView
 
     private var currentExpression: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,38 +32,26 @@ class MainActivity : Activity() {
         voiceSearchBar = findViewById(R.id.voiceSearchBar)
         voiceSearchBar.setHostActivity(this)
 
-        // Setup input/expression row and clear button
-        inputExpressionRow = findViewById(R.id.inputExpressionRow)
-        tvCurrentExpression = findViewById(R.id.tvCurrentExpression)
-        btnClearExpression = findViewById(R.id.btnClearExpression)
+        // Set up the result box below the calculator keypad
+        resultBox = findViewById(R.id.resultBox)
+        updateResultBox(voiceSearchBar.getQuery())
 
-        // (Optional: hide row initially if desired, currently always visible)
-        updateCurrentExpression(voiceSearchBar.getQuery())
-
-        // Listen to changes in the VoiceSearchBar EditText to update current expression
+        // Listen to changes in the VoiceSearchBar EditText to update result box
         voiceSearchBar.addQueryTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                updateCurrentExpression(s?.toString() ?: "")
+                updateResultBox(s?.toString() ?: "")
             }
             override fun afterTextChanged(s: Editable?) {}
         })
-
-        btnClearExpression.setOnClickListener {
-            voiceSearchBar.setQuery("")
-            updateCurrentExpression("")
-        }
 
         // --- CALCULATOR KEYPAD LOGIC: wire up all keys to update input ---
         wireCalculatorKeypad()
     }
 
-    private fun updateCurrentExpression(expression: String) {
+    private fun updateResultBox(expression: String) {
         currentExpression = expression
-        tvCurrentExpression.text = expression
-        // Optionally, you could hide the row or clear button when empty for more minimal effect
-        // inputExpressionRow.visibility = if (expression.isBlank()) View.GONE else View.VISIBLE
-        // btnClearExpression.visibility = if (expression.isBlank()) View.INVISIBLE else View.VISIBLE
+        resultBox.text = expression
     }
 
     /**
