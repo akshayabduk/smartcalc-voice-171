@@ -29,6 +29,7 @@ class MainActivity : Activity() {
     private var currentExpression: String = ""
     private var historyDrawer: View? = null
     private var isHistoryDrawerShowing: Boolean = false
+    private lateinit var resultHistoryRow: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +46,9 @@ class MainActivity : Activity() {
         // Set up the result box below the calculator keypad
         resultBox = findViewById(R.id.resultBox)
         updateResultBox(voiceSearchBar.getQuery())
+
+        // Find the result/history row (to show/hide when history is shown)
+        resultHistoryRow = findViewById(R.id.resultHistoryRow)
 
         // Listen to changes in the VoiceSearchBar EditText to update result box
         voiceSearchBar.addQueryTextChangedListener(object : TextWatcher {
@@ -181,6 +185,9 @@ class MainActivity : Activity() {
         isHistoryDrawerShowing = true
         populateHistoryDrawer(sheet)
 
+        // Hide result row while history is showing
+        resultHistoryRow.visibility = View.GONE
+
         // Dismiss on clicking outside
         root.isClickable = true
         root.bringToFront()
@@ -207,6 +214,8 @@ class MainActivity : Activity() {
                 root.visibility = View.GONE
                 historyDrawer = null
                 isHistoryDrawerShowing = false
+                // Restore result row visibility
+                resultHistoryRow.visibility = View.VISIBLE
             }, 250)
         }
     }
@@ -261,6 +270,12 @@ class MainActivity : Activity() {
             CalculationHistory.clear()
             populateHistoryDrawer(drawer)
             Toast.makeText(this, getString(R.string.empty_history_prompt), Toast.LENGTH_SHORT).show()
+        }
+
+        // Wire up close (X) button
+        val btnClose = drawer.findViewById<ImageButton>(R.id.btnCloseHistory)
+        btnClose.setOnClickListener {
+            hideHistoryDrawer()
         }
     }
 
