@@ -1,6 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
@@ -63,7 +62,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/bg_calc_button_normal"
                 android:src="@android:drawable/ic_menu_revert"
-                app:tint="@color/onSurface"
+                android:tint="@color/onSurface"
                 android:contentDescription="@string/undo_button_desc"
                 android:layout_marginEnd="4dp"
                 android:padding="8dp"/>
@@ -74,7 +73,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/bg_calc_button_normal"
                 android:src="@android:drawable/ic_menu_rotate"
-                app:tint="@color/onSurface"
+                android:tint="@color/onSurface"
                 android:contentDescription="@string/redo_button_desc"
                 android:padding="8dp"/>
         </LinearLayout>
@@ -86,7 +85,7 @@
             android:layout_height="46dp"
             android:layout_marginStart="12dp"
             android:src="@drawable/ic_history"
-            app:tint="@color/onSurface"
+            android:tint="@color/onSurface"
             android:background="@android:color/transparent"
             android:contentDescription="@string/history_icon_content_desc"
             android:clickable="true"

@@ -32,6 +32,4 @@
     <string name="redo_button_desc">Redo last undone change</string>
     <string name="swipe_to_delete_desc">Swipe left or right to delete</string>
     <string name="calculation_deleted">Calculation deleted</string>
-    <string name="favorite_button_desc">Toggle favorite status</string>
-    <string name="filter_favorites">Show favorites</string>
 </resources>
