@@ -8,6 +8,10 @@ import org.example.utilities.StringUtils
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.app.UiModeManager
+import android.content.Context
+import android.view.Menu
+import android.view.MenuItem
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.TextView
@@ -31,9 +35,13 @@ class MainActivity : Activity() {
     private var isHistoryDrawerShowing: Boolean = false
     private lateinit var resultHistoryRow: View
 
+    private lateinit var uiModeManager: UiModeManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        
+        uiModeManager = getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
 
         val textView = findViewById<TextView>(R.id.textView)
         // No longer show 'Hello World' or placeholder message, clear or hide the label
@@ -284,6 +292,30 @@ class MainActivity : Activity() {
         if (isHistoryDrawerShowing && historyDrawer != null) {
             populateHistoryDrawer(historyDrawer!!)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_theme, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_toggle_theme -> {
+                toggleTheme()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun toggleTheme() {
+        if (uiModeManager.nightMode == UiModeManager.MODE_NIGHT_NO) {
+            uiModeManager.nightMode = UiModeManager.MODE_NIGHT_YES
+        } else {
+            uiModeManager.nightMode = UiModeManager.MODE_NIGHT_NO
+        }
+        recreate() // Recreate activity to apply theme changes
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

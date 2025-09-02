@@ -5,13 +5,33 @@
     <color name="colorSecondary">#424242</color>
     <color name="colorAccent">#FFD600</color>
 
-    <!-- UI neutrals -->
-    <color name="surface">#F7F9FB</color>
-    <color name="onSurface">#212121</color>
-    <color name="hintText">#A0A4A8</color>
-    <color name="divider">#ECECEC</color>
-    <color name="buttonRipple">#1976D2</color>
-    <color name="keypadBg">#F2F4F9</color>
-    <color name="buttonSurface">#FFFFFF</color>
-    <color name="historyBg">#FAFAFA</color>
+    <!-- Light theme colors -->
+    <color name="surface_light">#F7F9FB</color>
+    <color name="onSurface_light">#212121</color>
+    <color name="hintText_light">#A0A4A8</color>
+    <color name="divider_light">#ECECEC</color>
+    <color name="buttonRipple_light">#1976D2</color>
+    <color name="keypadBg_light">#F2F4F9</color>
+    <color name="buttonSurface_light">#FFFFFF</color>
+    <color name="historyBg_light">#FAFAFA</color>
+
+    <!-- Dark theme colors -->
+    <color name="surface_dark">#121212</color>
+    <color name="onSurface_dark">#FFFFFF</color>
+    <color name="hintText_dark">#9AA0A6</color>
+    <color name="divider_dark">#3C4043</color>
+    <color name="buttonRipple_dark">#64B5F6</color>
+    <color name="keypadBg_dark">#1E1E1E</color>
+    <color name="buttonSurface_dark">#2C2C2C</color>
+    <color name="historyBg_dark">#1E1E1E</color>
+
+    <!-- Theme independent colors (referenced by both themes) -->
+    <color name="surface">@color/surface_light</color>
+    <color name="onSurface">@color/onSurface_light</color>
+    <color name="hintText">@color/hintText_light</color>
+    <color name="divider">@color/divider_light</color>
+    <color name="buttonRipple">@color/buttonRipple_light</color>
+    <color name="keypadBg">@color/keypadBg_light</color>
+    <color name="buttonSurface">@color/buttonSurface_light</color>
+    <color name="historyBg">@color/historyBg_light</color>
 </resources>

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Sample Declarative Gradle Android App</string>
+    <string name="toggle_theme">Toggle Dark Mode</string>
 
     <!-- VoiceSearchBar strings -->
     <string name="search_hint">Search or say something…</string>

@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base application theme (Light) -->
     <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:colorAccent">@color/colorAccent</item>
-        <item name="android:textColorPrimary">@color/onSurface</item>
-        <item name="android:windowBackground">@color/surface</item>
+        <item name="android:textColorPrimary">@color/onSurface_light</item>
+        <item name="android:windowBackground">@color/surface_light</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <!-- Dark theme -->
+    <style name="AppTheme.Dark" parent="android:Theme.Material.NoActionBar">
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/onSurface_dark</item>
+        <item name="android:windowBackground">@color/surface_dark</item>
         <item name="android:fontFamily">sans-serif</item>
     </style>
     <!-- Calculator button styles - modern and minimal -->

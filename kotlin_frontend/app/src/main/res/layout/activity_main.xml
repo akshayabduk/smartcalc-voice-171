@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/surface">
+    android:background="?android:windowBackground">
 
     <!-- Voice Search Bar at the top -->
     <org.example.app.VoiceSearchBar

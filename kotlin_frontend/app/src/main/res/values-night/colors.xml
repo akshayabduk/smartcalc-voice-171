@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme independent colors (for dark theme) -->
+    <color name="surface">@color/surface_dark</color>
+    <color name="onSurface">@color/onSurface_dark</color>
+    <color name="hintText">@color/hintText_dark</color>
+    <color name="divider">@color/divider_dark</color>
+    <color name="buttonRipple">@color/buttonRipple_dark</color>
+    <color name="keypadBg">@color/keypadBg_dark</color>
+    <color name="buttonSurface">@color/buttonSurface_dark</color>
+    <color name="historyBg">@color/historyBg_dark</color>
+</resources>
