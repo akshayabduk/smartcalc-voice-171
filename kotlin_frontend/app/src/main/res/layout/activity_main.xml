@@ -5,9 +5,8 @@
     tools:context=".MainActivity"
     android:background="@color/surface">
 
-    <include
+    <org.example.app.VoiceSearchBar
         android:id="@+id/voiceSearchBar"
-        layout="@layout/view_voice_search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true" />
