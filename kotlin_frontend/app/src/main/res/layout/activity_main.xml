@@ -108,6 +108,34 @@
         />
     </LinearLayout>
 
+    <!-- News Ticker below calculator keypad -->
+    <HorizontalScrollView
+        android:id="@+id/newsTickerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layoutCalculatorKeypadContainer"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="16dp"
+        android:scrollbars="none"
+        android:background="@drawable/bg_news_ticker"
+        android:fillViewport="true">
+        
+        <TextView
+            android:id="@+id/newsTickerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/onSurface"
+            android:textSize="14sp"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:scrollHorizontally="true"
+            android:focusable="true"
+            android:clickable="true" />
+    </HorizontalScrollView>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

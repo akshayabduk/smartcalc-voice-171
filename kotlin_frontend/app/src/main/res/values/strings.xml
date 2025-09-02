@@ -32,4 +32,6 @@
     <string name="redo_button_desc">Redo last undone change</string>
     <string name="swipe_to_delete_desc">Swipe left or right to delete</string>
     <string name="calculation_deleted">Calculation deleted</string>
+    <string name="news_ticker_content_desc">News ticker displaying latest updates</string>
+    <string name="sample_news">📱 Welcome to Smart Calculator • Stay up to date with our latest features • Voice commands now support complex calculations • Try saying "Calculate the square root of 144 plus 25" • More updates coming soon!</string>
 </resources>

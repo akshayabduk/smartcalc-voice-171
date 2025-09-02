@@ -19,6 +19,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.HorizontalScrollView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +28,7 @@ import android.widget.Toast
 import android.animation.ObjectAnimator
 
 class MainActivity : Activity() {
-
+    // Rest of the file remains unchanged
     private lateinit var voiceSearchBar: VoiceSearchBar
     private lateinit var resultBox: TextView
     private var currentExpression: String = ""
@@ -37,6 +38,8 @@ class MainActivity : Activity() {
     private lateinit var btnRedo: ImageButton
     private var isHistoryDrawerShowing: Boolean = false
     private lateinit var resultHistoryRow: View
+    private lateinit var newsTickerText: TextView
+    private var newsTickerAnimator: ObjectAnimator? = null
 
     private lateinit var uiModeManager: UiModeManager
 
@@ -84,6 +87,71 @@ class MainActivity : Activity() {
         wireCalculatorKeypad()
 
         setupHistoryPanel()
+        setupNewsTicker()
+    }
+
+    private fun setupNewsTicker() {
+        newsTickerText = findViewById(R.id.newsTickerText)
+        newsTickerText.text = getString(R.string.sample_news)
+        newsTickerText.contentDescription = getString(R.string.news_ticker_content_desc)
+        
+        // Start auto-scrolling animation
+        startNewsTickerAnimation()
+
+        // Handle touch to pause/resume scrolling
+        newsTickerText.setOnClickListener {
+            if (newsTickerAnimator?.isPaused == true) {
+                newsTickerAnimator?.resume()
+            } else {
+                newsTickerAnimator?.pause()
+            }
+        }
+    }
+
+    private fun startNewsTickerAnimation() {
+        newsTickerText.post {
+            val scrollView = newsTickerText.parent as HorizontalScrollView
+            val textWidth = newsTickerText.width
+            val screenWidth = scrollView.width
+
+            // Only animate if text is wider than the screen
+            if (textWidth > screenWidth) {
+                // Calculate total scroll distance including padding for smooth loop
+                val scrollAmount = textWidth + screenWidth
+
+                newsTickerAnimator?.cancel()
+                newsTickerAnimator = ObjectAnimator.ofInt(
+                    scrollView,
+                    "scrollX",
+                    0,
+                    scrollAmount
+                ).apply {
+                    duration = (scrollAmount * 25).toLong() // Speed based on content length
+                    repeatCount = ObjectAnimator.INFINITE
+                    repeatMode = ObjectAnimator.RESTART
+                    
+                    // Reset scroll position when reaching the end
+                    addUpdateListener { animator ->
+                        val currentScroll = animator.animatedValue as Int
+                        if (currentScroll >= textWidth) {
+                            scrollView.scrollTo(0, 0)
+                            animator.start()
+                        }
+                    }
+                    start()
+                }
+            }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        newsTickerAnimator?.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        newsTickerAnimator?.resume()
     }
 
     private fun updateResultBox(expression: String) {
