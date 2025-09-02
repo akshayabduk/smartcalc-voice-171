@@ -266,24 +266,36 @@ class MainActivity : Activity() {
             }
             historyListLayout.addView(emptyText)
         } else {
-            for ((expr, result) in allHistory) {
+            for (entry in allHistory) {
                 val entryView = LinearLayout(this).apply {
                     orientation = LinearLayout.VERTICAL
                     setPadding(0, 8, 0, 14)
                 }
+
+                // Add timestamp
+                val timestampView = TextView(this).apply {
+                    text = android.text.format.DateFormat.format("MMM d, h:mm a", entry.timestamp)
+                    setTextColor(resources.getColor(R.color.hintText))
+                    textSize = 12f
+                    alpha = 0.8f
+                }
+
                 val exprView = TextView(this).apply {
-                    text = expr
+                    text = entry.expression
                     setTextColor(resources.getColor(R.color.onSurface))
                     textSize = 15.5f
                     maxLines = 3
                 }
+
                 val resultView = TextView(this).apply {
-                    text = "= $result"
+                    text = "= ${entry.result}"
                     setTextColor(resources.getColor(R.color.colorPrimary))
                     textSize = 19f
                     setPadding(0, 2, 0, 0)
                     maxLines = 1
                 }
+
+                entryView.addView(timestampView)
                 entryView.addView(exprView)
                 entryView.addView(resultView)
                 historyListLayout.addView(entryView)

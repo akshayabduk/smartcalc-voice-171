@@ -18,4 +18,5 @@
     <string name="close_history">Close history</string>
     <string name="empty_history_prompt">No calculations yet.</string>
     <string name="history_icon_content_desc">Show calculation history</string>
+    <string name="timestamp_format">MMM d, h:mm a</string>
 </resources>
