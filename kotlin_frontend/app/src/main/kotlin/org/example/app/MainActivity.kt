@@ -103,8 +103,8 @@ class MainActivity : Activity() {
      * Adds listeners to calculator keypad buttons so that tapping a button appends the symbol to the input.
      */
     private fun wireCalculatorKeypad() {
-        // Helper to append symbol to the input bar
-        fun appendToInput(symbol: String) {
+        // Helper to append symbol to the input bar and announce for accessibility
+        fun appendToInput(symbol: String, contentDescription: String) {
             val orig = voiceSearchBar.getQuery()
             if (symbol == "=") {
                 // Evaluate
@@ -148,8 +148,20 @@ class MainActivity : Activity() {
         // Attach handlers for all normal buttons
         for ((id, symbol) in buttonMap) {
             val btn = findViewById<Button>(id)
-            btn?.setOnClickListener {
-                appendToInput(symbol)
+            btn?.apply {
+                contentDescription = when {
+                    symbol.matches(Regex("[0-9]")) -> getString(R.string.numeric_button_desc, symbol)
+                    symbol in setOf("+", "-", "×", "÷", "^") -> getString(R.string.operator_button_desc, symbol)
+                    symbol.endsWith("(") -> getString(R.string.function_button_desc, symbol.removeSuffix("("))
+                    symbol == "=" -> getString(R.string.equals_button_desc)
+                    else -> symbol
+                }
+                setOnClickListener {
+                    appendToInput(symbol, contentDescription.toString())
+                    announceForAccessibility(contentDescription)
+                }
+                minHeight = resources.getDimensionPixelSize(R.dimen.min_touch_target_size)
+                minWidth = resources.getDimensionPixelSize(R.dimen.min_touch_target_size)
             }
         }
 

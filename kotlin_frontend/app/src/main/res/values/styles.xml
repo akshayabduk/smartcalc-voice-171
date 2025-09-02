@@ -20,7 +20,7 @@
     <!-- Calculator button styles - modern and minimal -->
     <style name="CalcKey" parent="@android:style/Widget.Button">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">42dp</item>
+        <item name="android:layout_height">54dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textColor">@color/onSurface</item>
         <item name="android:textSize">17sp</item>
@@ -28,12 +28,14 @@
         <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/bg_calc_button_normal</item>
         <item name="android:foreground">@drawable/calc_button_ripple</item>
-        <item name="android:layout_margin">3dp</item>
-        <item name="android:minWidth">42dp</item>
-        <item name="android:minHeight">42dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:minWidth">@dimen/min_touch_target_size</item>
+        <item name="android:minHeight">@dimen/min_touch_target_size</item>
         <item name="android:elevation">1dp</item>
         <item name="android:paddingLeft">0dp</item>
         <item name="android:paddingRight">0dp</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
     </style>
 
     <style name="CalcKeyPrimary" parent="CalcKey">

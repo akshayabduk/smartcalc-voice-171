@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Minimum touch target size for accessibility (48dp) -->
+    <dimen name="min_touch_target_size">48dp</dimen>
+    
+    <!-- Standard spacing for improved touch targets -->
+    <dimen name="touch_target_spacing">8dp</dimen>
+</resources>

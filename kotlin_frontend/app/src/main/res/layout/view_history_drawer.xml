@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="450dp"
     android:orientation="vertical"
+    android:importantForAccessibility="yes"
+    android:contentDescription="@string/history_drawer_content_desc"
     android:background="@color/historyBg"
     android:padding="0dp"
     android:elevation="8dp"

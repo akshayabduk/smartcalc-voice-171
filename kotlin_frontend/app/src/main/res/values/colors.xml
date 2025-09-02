@@ -8,8 +8,8 @@
     <!-- Light theme colors -->
     <color name="surface_light">#F7F9FB</color>
     <color name="onSurface_light">#212121</color>
-    <color name="hintText_light">#A0A4A8</color>
-    <color name="divider_light">#ECECEC</color>
+    <color name="hintText_light">#757575</color>
+    <color name="divider_light">#BDBDBD</color>
     <color name="buttonRipple_light">#1976D2</color>
     <color name="keypadBg_light">#F2F4F9</color>
     <color name="buttonSurface_light">#FFFFFF</color>

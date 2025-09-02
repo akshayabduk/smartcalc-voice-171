@@ -10,7 +10,9 @@
         android:id="@+id/voiceSearchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:importantForAccessibility="yes"
+        android:contentDescription="@string/voice_search_content_desc" />
 
     <!-- Row: Result box and history button horizontally, directly below the search bar -->
     <LinearLayout
@@ -42,7 +44,10 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:fontFamily="sans-serif-medium"
-            android:elevation="1dp"/>
+            android:elevation="1dp"
+            android:contentDescription="@string/result_box_content_desc"
+            android:accessibilityLiveRegion="polite"
+            android:importantForAccessibility="yes"/>
 
         <!-- Inline modern history button (icon) -->
         <ImageView

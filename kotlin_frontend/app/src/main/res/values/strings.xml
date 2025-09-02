@@ -4,13 +4,21 @@
 
     <!-- VoiceSearchBar strings -->
     <string name="search_hint">Search or say something…</string>
-    <string name="voice_search_content_desc">Start voice input</string>
+    <string name="voice_search_content_desc">Start voice input for calculation</string>
     <string name="voice_error_no_recognizer">Speech recognition not available.</string>
     <string name="voice_error_no_permission">Microphone permission is required.</string>
     <string name="voice_error_result">Could not get speech result.</string>
 
     <!-- Expression/Clear row strings -->
-    <string name="clear_expression_content_desc">Clear input</string>
+    <string name="clear_expression_content_desc">Clear calculator input</string>
+    
+    <!-- Accessibility strings -->
+    <string name="result_box_content_desc">Calculator result</string>
+    <string name="history_drawer_content_desc">Calculation history panel</string>
+    <string name="numeric_button_desc">Number %1$s</string>
+    <string name="operator_button_desc">Operator %1$s</string>
+    <string name="function_button_desc">Function %1$s</string>
+    <string name="equals_button_desc">Calculate result</string>
 
     <!-- History feature strings -->
     <string name="history_panel_title">History</string>
@@ -19,4 +27,5 @@
     <string name="empty_history_prompt">No calculations yet.</string>
     <string name="history_icon_content_desc">Show calculation history</string>
     <string name="timestamp_format">MMM d, h:mm a</string>
+    <string name="keypad_content_desc">Calculator keypad</string>
 </resources>

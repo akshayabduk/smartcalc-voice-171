@@ -15,7 +15,9 @@
     android:clipToPadding="false"
     android:clipChildren="false"
     android:layout_marginBottom="4dp"
-    android:layout_marginTop="4dp">
+    android:layout_marginTop="4dp"
+    android:importantForAccessibility="yes"
+    android:contentDescription="@string/keypad_content_desc">
 
     <!-- Scientific row -->
     <LinearLayout
@@ -29,37 +31,65 @@
             style="@style/CalcKey"
             android:id="@+id/btnSin"
             android:text="sin"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/function_button_desc"
+            android:importantForAccessibility="yes"/>
         <Button
             style="@style/CalcKey"
             android:id="@+id/btnCos"
             android:text="cos"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/function_button_desc"
+            android:importantForAccessibility="yes"/>
         <Button
             style="@style/CalcKey"
             android:id="@+id/btnTan"
             android:text="tan"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/function_button_desc"
+            android:importantForAccessibility="yes"/>
         <Button
             style="@style/CalcKey"
             android:id="@+id/btnLog"
             android:text="log"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/function_button_desc"
+            android:importantForAccessibility="yes"/>
         <Button
             style="@style/CalcKey"
             android:id="@+id/btnLn"
             android:text="ln"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/function_button_desc"
+            android:importantForAccessibility="yes"/>
         <Button
             style="@style/CalcKey"
             android:id="@+id/btnSqrt"
             android:text="√"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/function_button_desc"
+            android:importantForAccessibility="yes"/>
         <Button
             style="@style/CalcKey"
             android:id="@+id/btnPower"
             android:text="^"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/function_button_desc"
+            android:importantForAccessibility="yes"/>
     </LinearLayout>
 
     <!-- Row: ( ) ÷ × -->
@@ -69,10 +99,38 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_marginBottom="4dp">
-        <Button style="@style/CalcKey" android:id="@+id/btnLParen" android:text="("/>
-        <Button style="@style/CalcKey" android:id="@+id/btnRParen" android:text=")"/>
-        <Button style="@style/CalcKey" android:id="@+id/btnDivide" android:text="÷"/>
-        <Button style="@style/CalcKey" android:id="@+id/btnMultiply" android:text="×"/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btnLParen" 
+            android:text="("
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/operator_button_desc"
+            android:importantForAccessibility="yes"/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btnRParen" 
+            android:text=")"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/operator_button_desc"
+            android:importantForAccessibility="yes"/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btnDivide" 
+            android:text="÷"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/operator_button_desc"
+            android:importantForAccessibility="yes"/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btnMultiply" 
+            android:text="×"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/operator_button_desc"
+            android:importantForAccessibility="yes"/>
     </LinearLayout>
 
     <!-- Row: 7 8 9 - -->
@@ -82,10 +140,38 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_marginBottom="4dp">
-        <Button style="@style/CalcKey" android:id="@+id/btn7" android:text="7"/>
-        <Button style="@style/CalcKey" android:id="@+id/btn8" android:text="8"/>
-        <Button style="@style/CalcKey" android:id="@+id/btn9" android:text="9"/>
-        <Button style="@style/CalcKey" android:id="@+id/btnMinus" android:text="−"/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btn7" 
+            android:text="7"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/numeric_button_desc"
+            android:importantForAccessibility="yes"/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btn8" 
+            android:text="8"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/numeric_button_desc"
+            android:importantForAccessibility="yes"/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btn9" 
+            android:text="9"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/numeric_button_desc"
+            android:importantForAccessibility="yes"/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btnMinus" 
+            android:text="−"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/operator_button_desc"
+            android:importantForAccessibility="yes"/>
     </LinearLayout>
 
     <!-- Row: 4 5 6 + -->
@@ -95,10 +181,38 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_marginBottom="4dp">
-        <Button style="@style/CalcKey" android:id="@+id/btn4" android:text="4"/>
-        <Button style="@style/CalcKey" android:id="@+id/btn5" android:text="5"/>
-        <Button style="@style/CalcKey" android:id="@+id/btn6" android:text="6"/>
-        <Button style="@style/CalcKey" android:id="@+id/btnPlus" android:text="+"/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btn4" 
+            android:text="4"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/numeric_button_desc"
+            android:importantForAccessibility="yes"/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btn5" 
+            android:text="5"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/numeric_button_desc"
+            android:importantForAccessibility="yes"/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btn6" 
+            android:text="6"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/numeric_button_desc"
+            android:importantForAccessibility="yes"/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btnPlus" 
+            android:text="+"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/operator_button_desc"
+            android:importantForAccessibility="yes"/>
     </LinearLayout>
 
     <!-- Row: 1 2 3 = -->
@@ -108,10 +222,38 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_marginBottom="4dp">
-        <Button style="@style/CalcKey" android:id="@+id/btn1" android:text="1"/>
-        <Button style="@style/CalcKey" android:id="@+id/btn2" android:text="2"/>
-        <Button style="@style/CalcKey" android:id="@+id/btn3" android:text="3"/>
-        <Button style="@style/CalcKeyPrimary" android:id="@+id/btnEquals" android:text="="/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btn1" 
+            android:text="1"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/numeric_button_desc"
+            android:importantForAccessibility="yes"/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btn2" 
+            android:text="2"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/numeric_button_desc"
+            android:importantForAccessibility="yes"/>
+        <Button 
+            style="@style/CalcKey" 
+            android:id="@+id/btn3" 
+            android:text="3"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/numeric_button_desc"
+            android:importantForAccessibility="yes"/>
+        <Button 
+            style="@style/CalcKeyPrimary" 
+            android:id="@+id/btnEquals" 
+            android:text="="
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/equals_button_desc"
+            android:importantForAccessibility="yes"/>
     </LinearLayout>
 
     <!-- Row: 0 . C -->
@@ -123,15 +265,26 @@
         <Button
             style="@style/CalcKeyWide"
             android:id="@+id/btn0"
-            android:text="0"/>
+            android:text="0"
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/numeric_button_desc"
+            android:importantForAccessibility="yes"/>
         <Button
             style="@style/CalcKey"
             android:id="@+id/btnDot"
-            android:text="."/>
+            android:text="."
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/operator_button_desc"
+            android:importantForAccessibility="yes"/>
         <Button
             style="@style/CalcKey"
             android:id="@+id/btnClear"
             android:text="C"
-            android:contentDescription="@string/clear_expression_content_desc"/>
+            android:minHeight="@dimen/min_touch_target_size"
+            android:minWidth="@dimen/min_touch_target_size"
+            android:contentDescription="@string/clear_expression_content_desc"
+            android:importantForAccessibility="yes"/>
     </LinearLayout>
 </LinearLayout>
