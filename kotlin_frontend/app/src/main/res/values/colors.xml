@@ -6,8 +6,12 @@
     <color name="colorAccent">#FFD600</color>
 
     <!-- UI neutrals -->
-    <color name="surface">#FFFFFF</color>
+    <color name="surface">#F7F9FB</color>
     <color name="onSurface">#212121</color>
-    <color name="hintText">#9E9E9E</color>
-    <color name="divider">#E0E0E0</color>
+    <color name="hintText">#A0A4A8</color>
+    <color name="divider">#ECECEC</color>
+    <color name="buttonRipple">#1976D2</color>
+    <color name="keypadBg">#F2F4F9</color>
+    <color name="buttonSurface">#FFFFFF</color>
+    <color name="historyBg">#FAFAFA</color>
 </resources>
