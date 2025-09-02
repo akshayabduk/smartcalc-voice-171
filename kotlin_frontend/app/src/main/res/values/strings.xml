@@ -28,4 +28,6 @@
     <string name="history_icon_content_desc">Show calculation history</string>
     <string name="timestamp_format">MMM d, h:mm a</string>
     <string name="keypad_content_desc">Calculator keypad</string>
+    <string name="undo_button_desc">Undo last input change</string>
+    <string name="redo_button_desc">Redo last undone change</string>
 </resources>

@@ -32,6 +32,9 @@ class MainActivity : Activity() {
     private lateinit var resultBox: TextView
     private var currentExpression: String = ""
     private var historyDrawer: View? = null
+    private lateinit var undoRedoManager: UndoRedoManager
+    private lateinit var btnUndo: ImageButton
+    private lateinit var btnRedo: ImageButton
     private var isHistoryDrawerShowing: Boolean = false
     private lateinit var resultHistoryRow: View
 
@@ -42,6 +45,16 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
         
         uiModeManager = getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
+        
+        // Initialize undo/redo manager
+        undoRedoManager = UndoRedoManager()
+        undoRedoManager.addState("")  // Initial empty state
+
+        // Set up undo/redo buttons
+        btnUndo = findViewById(R.id.btnUndo)
+        btnRedo = findViewById(R.id.btnRedo)
+        
+        setupUndoRedoButtons()
 
         val textView = findViewById<TextView>(R.id.textView)
         // No longer show 'Hello World' or placeholder message, clear or hide the label
@@ -76,6 +89,33 @@ class MainActivity : Activity() {
     private fun updateResultBox(expression: String) {
         currentExpression = expression
         resultBox.text = expression
+        undoRedoManager.addState(expression)
+        updateUndoRedoButtonStates()
+    }
+
+    private fun setupUndoRedoButtons() {
+        btnUndo.setOnClickListener {
+            undoRedoManager.undo()?.let { prevState ->
+                voiceSearchBar.setQuery(prevState)
+                updateUndoRedoButtonStates()
+            }
+        }
+
+        btnRedo.setOnClickListener {
+            undoRedoManager.redo()?.let { nextState ->
+                voiceSearchBar.setQuery(nextState)
+                updateUndoRedoButtonStates()
+            }
+        }
+
+        updateUndoRedoButtonStates()
+    }
+
+    private fun updateUndoRedoButtonStates() {
+        btnUndo.isEnabled = undoRedoManager.canUndo()
+        btnRedo.isEnabled = undoRedoManager.canRedo()
+        btnUndo.alpha = if (undoRedoManager.canUndo()) 1.0f else 0.3f
+        btnRedo.alpha = if (undoRedoManager.canRedo()) 1.0f else 0.3f
     }
 
     /**
@@ -171,6 +211,9 @@ class MainActivity : Activity() {
             voiceSearchBar.setQuery("")
             resultBox.text = ""
             currentExpression = ""
+            undoRedoManager.clear()
+            undoRedoManager.addState("")
+            updateUndoRedoButtonStates()
         }
     }
 
