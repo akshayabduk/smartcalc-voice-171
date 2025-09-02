@@ -18,4 +18,4 @@ To run the application, first install it on a connected Android device using:
   :app:installDebug
 ```
 
-Then search for "Sample Declarative Gradle Android App" and launch app to see a hello world message.
+Then search for "Sample Declarative Gradle Android App" and launch app to see the calculator.

@@ -26,7 +26,8 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
 
         val textView = findViewById<TextView>(R.id.textView)
-        textView.text = buildMessage()
+        // No longer show 'Hello World' or placeholder message, clear or hide the label
+        textView.text = ""
 
         // Initialize VoiceSearchBar and connect to this Activity
         voiceSearchBar = findViewById(R.id.voiceSearchBar)
@@ -89,7 +90,7 @@ class MainActivity : Activity() {
             // updateCurrentExpression(newExpr) // voiceSearchBar will trigger update through listener!
         }
 
-        // Button ID to symbol mapping
+        // Button ID to symbol mapping (now including Clear button)
         val buttonMap = listOf(
             Pair(R.id.btn0, "0"),
             Pair(R.id.btn1, "1"),
@@ -115,14 +116,23 @@ class MainActivity : Activity() {
             Pair(R.id.btnLn, "ln("),
             Pair(R.id.btnSqrt, "√("),
             Pair(R.id.btnPower, "^"),
-            Pair(R.id.btnEquals, "=") // special: calculation not implemented yet
+            Pair(R.id.btnEquals, "=") // evaluate
         )
 
+        // Attach handlers for all normal buttons
         for ((id, symbol) in buttonMap) {
             val btn = findViewById<Button>(id)
             btn?.setOnClickListener {
                 appendToInput(symbol)
             }
+        }
+
+        // Clear/reset button: clears input and result
+        val btnClear = findViewById<Button>(R.id.btnClear)
+        btnClear?.setOnClickListener {
+            voiceSearchBar.setQuery("")
+            resultBox.text = ""
+            currentExpression = ""
         }
     }
 
@@ -141,9 +151,5 @@ class MainActivity : Activity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    private fun buildMessage(): String {
-        val tokens: LinkedList = SplitUtils.split(MessageUtils.message())
-        val result: String = StringUtils.join(tokens)
-        return WordUtils.capitalize(result)
-    }
+    // No longer need buildMessage() or MessageUtils; cleanly removed.
 }

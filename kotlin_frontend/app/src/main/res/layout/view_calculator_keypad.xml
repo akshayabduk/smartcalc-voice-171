@@ -102,13 +102,24 @@
         <Button style="@style/CalcKeyPrimary" android:id="@+id/btnEquals" android:text="="/>
     </LinearLayout>
 
-    <!-- Row: 0 . -->
+    <!-- Row: 0 . C -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
-        <Button style="@style/CalcKeyWide" android:id="@+id/btn0" android:text="0"/>
-        <Button style="@style/CalcKey" android:id="@+id/btnDot" android:text="."/>
+        <Button
+            style="@style/CalcKeyWide"
+            android:id="@+id/btn0"
+            android:text="0"/>
+        <Button
+            style="@style/CalcKey"
+            android:id="@+id/btnDot"
+            android:text="."/>
+        <Button
+            style="@style/CalcKey"
+            android:id="@+id/btnClear"
+            android:text="C"
+            android:contentDescription="@string/clear_expression_content_desc"/>
     </LinearLayout>
 </LinearLayout>
