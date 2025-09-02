@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Sample Declarative Gradle Android App</string>
+
+    <!-- VoiceSearchBar strings -->
+    <string name="search_hint">Search or say something…</string>
+    <string name="voice_search_content_desc">Start voice input</string>
+    <string name="voice_error_no_recognizer">Speech recognition not available.</string>
+    <string name="voice_error_no_permission">Microphone permission is required.</string>
+    <string name="voice_error_result">Could not get speech result.</string>
+</resources>
