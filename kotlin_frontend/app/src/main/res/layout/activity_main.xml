@@ -5,34 +5,66 @@
     tools:context=".MainActivity"
     android:background="@color/surface">
 
-    <!-- History icon button (top right) -->
-    <ImageView
-        android:id="@+id/btnShowHistory"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_history"
-        android:tint="@color/onSurface"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/history_icon_content_desc"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="14dp"
-        android:layout_marginTop="10dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:elevation="8dp"/>
-
+    <!-- Voice Search Bar at the top -->
     <org.example.app.VoiceSearchBar
         android:id="@+id/voiceSearchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true" />
 
+    <!-- Row: Result box and history button horizontally, directly below the search bar -->
+    <LinearLayout
+        android:id="@+id/resultHistoryRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/voiceSearchBar"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:elevation="1dp">
+
+        <TextView
+            android:id="@+id/resultBox"
+            android:layout_width="0dp"
+            android:layout_height="66dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:paddingStart="26dp"
+            android:paddingEnd="18dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:text=""
+            android:textColor="@color/onSurface"
+            android:textSize="24sp"
+            android:background="@drawable/bg_result_box"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:fontFamily="sans-serif-medium"
+            android:elevation="1dp"/>
+
+        <!-- Inline modern history button (icon) -->
+        <ImageView
+            android:id="@+id/btnShowHistory"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_history"
+            android:tint="@color/onSurface"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/history_icon_content_desc"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="center"
+            android:elevation="4dp"/>
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/layoutCalculatorKeypadContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/voiceSearchBar"
+        android:layout_below="@id/resultHistoryRow"
         android:layout_marginTop="8dp"
         android:orientation="vertical">
         <include
@@ -40,29 +72,6 @@
             android:id="@+id/calculatorKeypad"
         />
     </LinearLayout>
-
-    <!-- Minimal modern result box displaying numbers or expressions, styled -->
-    <TextView
-        android:id="@+id/resultBox"
-        android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:layout_below="@id/layoutCalculatorKeypadContainer"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="22dp"
-        android:gravity="center_vertical|end"
-        android:paddingStart="26dp"
-        android:paddingEnd="26dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:text=""
-        android:textColor="@color/onSurface"
-        android:textSize="24sp"
-        android:background="@drawable/bg_result_box"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:fontFamily="sans-serif-medium"
-        android:elevation="1dp"/>
 
     <TextView
         android:id="@+id/textView"
