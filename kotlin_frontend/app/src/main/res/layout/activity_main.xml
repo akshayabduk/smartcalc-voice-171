@@ -79,19 +79,20 @@
         </LinearLayout>
 
         <!-- Inline modern history button (icon) -->
-        <ImageView
+        <ImageButton
             android:id="@+id/btnShowHistory"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="12dp"
             android:src="@drawable/ic_history"
             android:tint="@color/onSurface"
-            android:background="@android:color/transparent"
+            android:background="@drawable/bg_calc_button_normal"
+            android:foreground="@drawable/calc_button_ripple"
             android:contentDescription="@string/history_icon_content_desc"
             android:clickable="true"
             android:focusable="true"
-            android:scaleType="center"
-            android:elevation="4dp"/>
+            android:padding="12dp"
+            android:elevation="1dp"/>
     </LinearLayout>
 
     <LinearLayout

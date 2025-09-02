@@ -239,70 +239,66 @@ class MainActivity : Activity() {
         val root = findViewById<ViewGroup>(R.id.historyDrawerContainer)
         if (isHistoryDrawerShowing) return
 
-        // inflate and add the history sheet UI
-        // Inflate sheet
+        // Prevent multiple drawer instances
+        if (historyDrawer != null) {
+            root.removeView(historyDrawer)
+            historyDrawer = null
+        }
+
+        // Inflate and setup drawer
         val sheet = LayoutInflater.from(this).inflate(R.layout.view_history_drawer, root, false)
-        sheet.setOnClickListener { /* Eat touch events to keep drawer open */ }
+        sheet.setOnClickListener { /* Prevent clicks from closing drawer */ }
         root.addView(sheet)
         root.visibility = View.VISIBLE
         historyDrawer = sheet
         isHistoryDrawerShowing = true
 
-        // Start from below screen and animate up
+        // Prepare animation
         sheet.alpha = 0f
-        sheet.translationY = 1200f
-        sheet.animate()
-            .translationY(0f)
-            .alpha(1f)
-            .setDuration(300)
-            .withStartAction {
-                // Hide result row when animation starts
-                resultHistoryRow.animate()
-                    .alpha(0f)
-                    .setDuration(200)
-                    .withEndAction {
-                        resultHistoryRow.visibility = View.GONE
-                    }
+        sheet.translationY = resources.displayMetrics.heightPixels.toFloat()
+
+        // Animate drawer entry with proper timing
+        resultHistoryRow.animate()
+            .alpha(0f)
+            .setDuration(200)
+            .withEndAction {
+                resultHistoryRow.visibility = View.GONE
+                sheet.animate()
+                    .translationY(0f)
+                    .alpha(1f)
+                    .setDuration(300)
+                    .start()
             }
             .start()
 
         populateHistoryDrawer(sheet)
-
-        // Dismiss on clicking outside
         root.isClickable = true
-        root.bringToFront()
-
-        // Animate drawer up (if possible)
-        sheet.translationY = sheet.height.toFloat() + 150f
-        ObjectAnimator.ofFloat(sheet, "translationY", 1200f, 0f)
-            .apply { duration = 310 }.start()
     }
 
     private fun hideHistoryDrawer() {
         val root = findViewById<ViewGroup>(R.id.historyDrawerContainer)
         if (!isHistoryDrawerShowing || historyDrawer == null) return
 
-        // Animate down + fade out
         historyDrawer?.let { drawer ->
+            // First animate drawer down
             drawer.animate()
-                .translationY(1200f)
+                .translationY(resources.displayMetrics.heightPixels.toFloat())
                 .alpha(0f)
                 .setDuration(250)
-                .withStartAction {
-                    // Show result row with fade in
-                    resultHistoryRow.visibility = View.VISIBLE
-                    resultHistoryRow.alpha = 0f
-                    resultHistoryRow.animate()
-                        .alpha(1f)
-                        .setDuration(200)
-                        .start()
-                }
                 .withEndAction {
                     root.removeView(drawer)
                     root.visibility = View.GONE
                     historyDrawer = null
                     isHistoryDrawerShowing = false
                 }
+                .start()
+
+            // Simultaneously fade in result row
+            resultHistoryRow.visibility = View.VISIBLE
+            resultHistoryRow.alpha = 0f
+            resultHistoryRow.animate()
+                .alpha(1f)
+                .setDuration(200)
                 .start()
         }
     }
