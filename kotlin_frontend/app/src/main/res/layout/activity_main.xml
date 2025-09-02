@@ -11,6 +11,43 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true" />
 
+    <!-- New horizontal input/expression/clear row, modern style -->
+    <LinearLayout
+        android:id="@+id/inputExpressionRow"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/voiceSearchBar"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_search_container"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvCurrentExpression"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/onSurface"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:paddingStart="12dp"
+            android:paddingEnd="8dp" />
+
+        <ImageButton
+            android:id="@+id/btnClearExpression"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:tint="@color/colorPrimary"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:contentDescription="@string/clear_expression_content_desc"
+            android:layout_marginEnd="4dp"/>
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

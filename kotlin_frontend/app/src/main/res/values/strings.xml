@@ -7,4 +7,7 @@
     <string name="voice_error_no_recognizer">Speech recognition not available.</string>
     <string name="voice_error_no_permission">Microphone permission is required.</string>
     <string name="voice_error_result">Could not get speech result.</string>
+
+    <!-- Expression/Clear row strings -->
+    <string name="clear_expression_content_desc">Clear input</string>
 </resources>
