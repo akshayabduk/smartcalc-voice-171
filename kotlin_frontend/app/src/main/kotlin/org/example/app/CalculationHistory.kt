@@ -29,6 +29,14 @@ object CalculationHistory {
     fun getHistory(): List<HistoryEntry> = entries.toList()
 
     // PUBLIC_INTERFACE
+    /** Removes an entry at the specified position. */
+    fun removeAt(position: Int) {
+        if (position in 0 until entries.size) {
+            entries.removeAt(position)
+        }
+    }
+
+    // PUBLIC_INTERFACE
     /** Removes all entries from history. */
     fun clear() {
         entries.clear()

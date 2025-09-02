@@ -4,5 +4,6 @@ androidApplication {
     dependencies {
         implementation("org.apache.commons:commons-text:1.11.0")
         implementation(project(":utilities"))
+        implementation("androidx.recyclerview:recyclerview:1.3.2")
     }
 }

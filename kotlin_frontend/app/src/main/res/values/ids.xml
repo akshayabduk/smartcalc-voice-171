@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="emptyHistoryText" type="id"/>
+    <item name="historyTimestamp" type="id"/>
+    <item name="historyExpression" type="id"/>
+    <item name="historyResult" type="id"/>
+</resources>

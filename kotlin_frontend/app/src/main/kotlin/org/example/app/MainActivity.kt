@@ -308,10 +308,12 @@ class MainActivity : Activity() {
     }
 
     private fun populateHistoryDrawer(drawer: View) {
-        val historyListLayout = drawer.findViewById<LinearLayout>(R.id.historyList)
-        historyListLayout.removeAllViews()
+        val recyclerView = drawer.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.historyRecyclerView)
         val allHistory = CalculationHistory.getHistory()
+
         if (allHistory.isEmpty()) {
+            // Show empty state
+            recyclerView.visibility = View.GONE
             val emptyText = TextView(this).apply {
                 setText(R.string.empty_history_prompt)
                 setTextColor(resources.getColor(R.color.hintText))
@@ -319,48 +321,42 @@ class MainActivity : Activity() {
                 setPadding(0, 32, 0, 0)
                 gravity = android.view.Gravity.CENTER_HORIZONTAL
             }
-            historyListLayout.addView(emptyText)
+            val parent = recyclerView.parent as ViewGroup
+            if (parent.findViewById<TextView>(R.id.emptyHistoryText) == null) {
+                emptyText.id = R.id.emptyHistoryText
+                parent.addView(emptyText)
+            }
         } else {
-            for (entry in allHistory) {
-                val entryView = LinearLayout(this).apply {
-                    orientation = LinearLayout.VERTICAL
-                    setPadding(0, 8, 0, 14)
-                }
+            recyclerView.visibility = View.VISIBLE
+            drawer.findViewById<TextView>(R.id.emptyHistoryText)?.let {
+                (it.parent as ViewGroup).removeView(it)
+            }
 
-                // Add timestamp
-                val timestampView = TextView(this).apply {
-                    text = android.text.format.DateFormat.format("MMM d, h:mm a", entry.timestamp)
-                    setTextColor(resources.getColor(R.color.hintText))
-                    textSize = 12f
-                    alpha = 0.8f
+            // Set up RecyclerView if not already set up
+            if (recyclerView.adapter == null) {
+                val adapter = HistoryAdapter(allHistory.toMutableList()) { position ->
+                    // Handle item removal
+                    CalculationHistory.removeAt(position)
                 }
+                recyclerView.adapter = adapter
+                recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
+                
+                // Add dividers between items
+                val dividerItemDecoration = androidx.recyclerview.widget.DividerItemDecoration(
+                    recyclerView.context,
+                    androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
+                )
+                recyclerView.addItemDecoration(dividerItemDecoration)
 
-                val exprView = TextView(this).apply {
-                    text = entry.expression
-                    setTextColor(resources.getColor(R.color.onSurface))
-                    textSize = 15.5f
-                    maxLines = 3
+                // Add swipe-to-delete functionality
+                val swipeHandler = SwipeToDeleteCallback(adapter, this)
+                val itemTouchHelper = androidx.recyclerview.widget.ItemTouchHelper(swipeHandler)
+                itemTouchHelper.attachToRecyclerView(recyclerView)
+            } else {
+                // Update existing adapter
+                (recyclerView.adapter as HistoryAdapter).let { adapter ->
+                    adapter.notifyDataSetChanged()
                 }
-
-                val resultView = TextView(this).apply {
-                    text = "= ${entry.result}"
-                    setTextColor(resources.getColor(R.color.colorPrimary))
-                    textSize = 19f
-                    setPadding(0, 2, 0, 0)
-                    maxLines = 1
-                }
-
-                entryView.addView(timestampView)
-                entryView.addView(exprView)
-                entryView.addView(resultView)
-                historyListLayout.addView(entryView)
-                // Optionally: add divider here
-                val divider = View(this).apply {
-                    setBackgroundColor(resources.getColor(R.color.divider))
-                    layoutParams = ViewGroup.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, 1)
-                }
-                historyListLayout.addView(divider)
             }
         }
         // Wire up "clear history" button
